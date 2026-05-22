@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drashti Patel — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0c;
+    --ink2: #2a2925;
+    --muted: #7a7870;
+    --surface: #f7f5f0;
+    --paper: #fdfcf9;
+    --accent: #c8553d;
+    --accent2: #e8a87c;
+    --gold: #c9a84c;
+    --border: rgba(15,14,12,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(253,252,249,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 5% 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; right: -8%; top: 10%;
+    width: 55vw; height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f2ede4 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-left { position: relative; z-index: 1; animation: fadeUp 1s ease both; }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+  .hero-name { font-family: var(--serif); font-size: clamp(3.2rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--ink); margin-bottom: 0.2rem; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-subtitle { font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; color: var(--muted); margin-bottom: 2rem; font-style: italic; }
+  .hero-desc { font-size: 0.95rem; color: var(--ink2); max-width: 420px; line-height: 1.8; margin-bottom: 2.8rem; }
+  .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-block; padding: 0.85rem 2rem; background: var(--ink); color: #fff; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, transform 0.15s; border-radius: 2px; }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-outline { display: inline-block; padding: 0.85rem 2rem; border: 1px solid var(--ink); color: var(--ink); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; border-radius: 2px; }
+  .btn-outline:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
+  .hero-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; animation: fadeUp 1.1s 0.2s ease both; }
+  .hero-portrait-frame { width: 100%; max-width: 420px; aspect-ratio: 3/4; background: linear-gradient(145deg, #e8e3d8 0%, #d4cdc0 100%); border-radius: 160px 160px 0 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid var(--border); }
+  .hero-initials { font-family: var(--serif); font-size: 7rem; font-weight: 300; color: rgba(15,14,12,0.12); letter-spacing: -0.04em; user-select: none; }
+
+  /* SECTIONS */
+  section { padding: 6rem 5%; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 3rem; max-width: 560px; }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { font-size: 0.97rem; color: var(--ink2); line-height: 1.85; margin-bottom: 1.2rem; }
+  .about-text .highlight { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--ink); font-style: italic; margin-bottom: 1.5rem; line-height: 1.45; border-left: 2px solid var(--accent); padding-left: 1.2rem; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .skill-card { padding: 1.4rem 1.2rem; border: 0.5px solid var(--border); border-radius: 4px; background: var(--surface); transition: transform 0.2s, box-shadow 0.2s; }
+  .skill-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.06); }
+  .skill-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .skill-name { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+  .skill-level { margin-top: 0.6rem; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-level-fill { height: 100%; background: var(--accent); border-radius: 2px; animation: grow 1.5s ease both; animation-delay: 0.5s; }
+
+  /* TOOLS */
+  .tools-section { background: var(--surface); }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+  .tool-pill { padding: 1rem 1.2rem; border: 0.5px solid var(--border); background: var(--paper); border-radius: 4px; text-align: center; font-size: 0.82rem; font-weight: 500; color: var(--ink2); transition: all 0.2s; }
+  .tool-pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .tool-pill .tool-emoji { display: block; font-size: 1.5rem; margin-bottom: 0.4rem; }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; }
+  .project-card { border: 0.5px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--paper); transition: transform 0.25s, box-shadow 0.25s; }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+  /* FIX 1: featured card is full width, stacked (NOT side by side) */
+  .project-card.featured { grid-column: 1 / -1; display: block; }
+
+  .project-thumb { aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 3.5rem; font-weight: 300; color: rgba(255,255,255,0.3); position: relative; overflow: hidden; }
+  .project-thumb::after { content: attr(data-label); position: absolute; bottom: 1rem; left: 1rem; font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.25); padding: 0.3rem 0.7rem; border-radius: 2px; }
+  .t2 { background: linear-gradient(135deg, #2d4a3e 0%, #1a3328 100%); }
+  .t3 { background: linear-gradient(135deg, #4a2c2a 0%, #7c4b45 100%); }
+  .t4 { background: linear-gradient(135deg, #2a1f3d 0%, #4a3060 100%); }
+  .project-body { padding: 1.5rem 1.6rem; }
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+  .project-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 0.5px solid var(--accent); padding: 0.2rem 0.55rem; border-radius: 2px; }
+  .project-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); line-height: 1.2; margin-bottom: 0.7rem; }
+  .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .project-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+  .project-link::after { content: '→'; transition: transform 0.2s; }
+  .project-link:hover { color: var(--accent); }
+  .project-link:hover::after { transform: translateX(4px); }
+
+  /* PROCESS */
+  .process-section { background: var(--ink); color: #fff; }
+  .process-section .section-label { color: var(--accent2); }
+  .process-section .section-label::after { background: var(--accent2); }
+  .process-section .section-title { color: #fff; }
+  .process-section .section-title em { color: var(--accent2); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .process-step { position: relative; }
+  .step-num { font-family: var(--serif); font-size: 4rem; font-weight: 300; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 0.8rem; }
+  .step-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem; }
+  .step-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+  .step-line { position: absolute; top: 1.8rem; right: -1rem; width: 2rem; height: 1px; background: rgba(255,255,255,0.12); }
+
+  /* CONTACT */
+  .contact-section { background: var(--surface); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; padding-bottom: 1.8rem; border-bottom: 0.5px solid var(--border); }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-icon { width: 40px; height: 40px; background: var(--paper); border: 0.5px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  .contact-value { font-size: 0.97rem; color: var(--ink); }
+  .contact-value a { color: inherit; text-decoration: none; }
+  .contact-value a:hover { color: var(--accent); }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .form-group input, .form-group textarea { width: 100%; padding: 0.85rem 1rem; border: 0.5px solid var(--border); background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 0.9rem; border-radius: 3px; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .btn-send { width: 100%; padding: 1rem; background: var(--accent); color: #fff; border: none; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 3px; cursor: pointer; transition: background 0.25s, transform 0.15s; }
+  .btn-send:hover { background: #a3432d; transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid var(--border); }
+  .footer-name { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); }
+  .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes grow { from { width: 0; } }
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 6rem 5% 3rem; }
+    .about-grid, .contact-section { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: auto; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .step-line { display: none; }
+  }
+
+  /* ══════════════════════════════
+     CAROUSEL — fully fixed
+  ══════════════════════════════ */
+
+  /* The wrapper that holds the carousel — sets the visible height */
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;          /* ← change this number to make taller/shorter */
+    background: #111;
+    overflow: hidden;
+  }
+
+  /* The sliding track */
+  .carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* FIX 2: each slide is full width, full height, image fully visible */
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+  }
+
+  /* FIX 3: object-fit CONTAIN so image is never cropped */
+  .carousel-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Arrow buttons */
+  .car-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+    padding: 0;
+    line-height: 1;
+  }
+  .car-btn:hover { background: rgba(255,255,255,0.4); }
+  .car-prev { left: 0.8rem; }
+  .car-next { right: 0.8rem; }
+
+  /* Instagram-style "1 / 7" counter top-right */
+  .car-counter {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    z-index: 10;
+    letter-spacing: 0.05em;
+  }
+
+  /* Dots */
+  .car-dots {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+  }
+  .car-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .car-dot.active { background: #fff; transform: scale(1.4); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Drashti Patel</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">UI / UX Designer</div>
+    <h1 class="hero-name">Drashti<br><em>Patel</em></h1>
+    <p class="hero-subtitle">Crafting experiences that matter</p>
+    <p class="hero-desc">I design digital products that balance beauty with function — creating seamless, intuitive experiences that connect people with what they need, effortlessly.</p>
+    <div class="btn-row">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Designing with <em>purpose</em> and precision</h2>
+      <p class="highlight">"Good design is invisible — it gets out of the way so the user can accomplish their goal."</p>
+      <p>Hi, I'm Drashti — a UI/UX Designer passionate about creating thoughtful digital experiences. I specialize in translating complex problems into clean, human-centered design solutions.</p>
+      <p>My approach blends research-driven insight with visual craft, ensuring every pixel serves a purpose. From wireframes to polished prototypes, I bring ideas to life with precision and care.</p>
+      <p>I enjoy collaborating closely with product teams and developers to ensure that great design doesn't stop at the mockup — it reaches the final product.</p>
+    </div>
+    <div>
+      <div class="section-label">Core Skills</div>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-icon">🎨</div><div class="skill-name">UI Design</div><div class="skill-level"><div class="skill-level-fill" style="width:92%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">🧭</div><div class="skill-name">UX Research</div><div class="skill-level"><div class="skill-level-fill" style="width:85%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">✦</div><div class="skill-name">Prototyping</div><div class="skill-level"><div class="skill-level-fill" style="width:88%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">📱</div><div class="skill-name">Mobile Design</div><div class="skill-level"><div class="skill-level-fill" style="width:80%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">♿</div><div class="skill-name">Accessibility</div><div class="skill-level"><div class="skill-level-fill" style="width:78%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">🔷</div><div class="skill-name">Design Systems</div><div class="skill-level"><div class="skill-level-fill" style="width:82%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section fade-in">
+  <div class="section-label">Toolkit</div>
+  <h2 class="section-title">Tools I <em>design</em> with</h2>
+  <div class="tools-grid">
+    <div class="tool-pill"><span class="tool-emoji">🖌️</span>Figma</div>
+    <!-- <div class="tool-pill"><span class="tool-emoji">⚡</span>Adobe XD</div>
+    <div class="tool-pill"><span class="tool-emoji">🎭</span>Framer</div>
+    <div class="tool-pill"><span class="tool-emoji">✍️</span>Sketch</div>
+    <div class="tool-pill"><span class="tool-emoji">📸</span>Photoshop</div>
+    <div class="tool-pill"><span class="tool-emoji">🌀</span>Illustrator</div>
+    <div class="tool-pill"><span class="tool-emoji">🔬</span>Maze</div>
+    <div class="tool-pill"><span class="tool-emoji">📊</span>Miro</div>
+    <div class="tool-pill"><span class="tool-emoji">💬</span>Zeplin</div>
+    <div class="tool-pill"><span class="tool-emoji">🧩</span>InVision</div> -->
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="work">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Projects that <em>inspire</em></h2>
+  <div class="projects-grid fade-in">
+
+    <!-- Project 1: SolarMatrix -->
+    <div class="project-card featured">
+      <!-- Carousel image area -->
+      <div class="carousel-wrapper" id="carousel-1">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="images/Splash-screen.png" alt="Splash screen"></div>
+          <div class="carousel-slide"><img src="images/Company-code.png" alt="Company Code screen"></div>
+          <div class="carousel-slide"><img src="images/Login.png" alt="Login screen"></div>
+          <div class="carousel-slide"><img src="images/OTP-screen.png" alt="OTP screen"></div>
+          <div class="carousel-slide"><img src="images/Home.png" alt="Home screen"></div>
+          <div class="carousel-slide"><img src="images/Meeting.png" alt="Meeting screen"></div>
+          <div class="carousel-slide"><img src="images/Meeting1.png" alt="Meeting detail"></div>
+          <div class="carousel-slide"><img src="images/Profile.png" alt="Profile screen"></div>
+          <div class="carousel-slide"><img src="images/Trip.png" alt="Trip screen"></div>
+          <div class="carousel-slide"><img src="images/Site-visit.png" alt="Site visit screen"></div>
+          <div class="carousel-slide"><img src="images/Task.png" alt="Task screen"></div>
+          <div class="carousel-slide"><img src="images/Search.png" alt="Task screen"></div>
+        </div>
+
+        <!-- Counter updated dynamically by JS -->
+        <div class="car-counter" id="counter-carousel-1">1 / 12</div>
+
+        <!-- Left / Right arrows -->
+        <button class="car-btn car-prev" onclick="moveCarousel('carousel-1', -1)">&#8249;</button>
+        <button class="car-btn car-next" onclick="moveCarousel('carousel-1', 1)">&#8250;</button>
+
+        <!-- Dot indicators -->
+        <div class="car-dots" id="dots-carousel-1"></div>
+      </div>
+
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Mobile App</span>
+          <span class="project-tag">UI/UX</span>
+          <span class="project-tag">Featured</span>
+        </div>
+        <h3 class="project-title">SolarMatrix</h3>
+        <p class="project-desc">Designed the SolarMatrix employee management app UI/UX in Figma with features like task tracking, meetings, trips, site visits, and live location management to improve workflow efficiency and user experience.</p>
+        <a href="#" class="project-link">View Case Study</a>
+      </div>
+    </div>
+
+    <!-- Project 2: MySolar+ (FIXED IDs) -->
+    <div class="project-card featured">
+      <!-- Carousel image area updated to carousel-2 -->
+      <div class="carousel-wrapper" id="carousel-2">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="photos/Splash-screen.png" alt="Splash screen"></div>
+          <div class="carousel-slide"><img src="photos/Company-code.png" alt="Company Code screen"></div>
+          <div class="carousel-slide"><img src="photos/OTP-screen.png" alt="OTP screen"></div>
+          <div class="carousel-slide"><img src="photos/Login.png" alt="Login screen"></div>
+          <div class="carousel-slide"><img src="photos/Home.png" alt="Home screen"></div>
+          <div class="carousel-slide"><img src="photos/Project.png" alt="Project screen"></div>
+          <div class="carousel-slide"><img src="photos/Monitoring.png" alt="Monitoring screen"></div>
+          <div class="carousel-slide"><img src="photos/Profile-edit.png" alt="Profile edit screen"></div>
+          <div class="carousel-slide"><img src="photos/Profile-edit2.png" alt="Profile edit screen"></div>
+
+        </div>
+
+        <!-- Counter updated dynamically by JS -->
+        <div class="car-counter" id="counter-carousel-2">1 / 10</div>
+
+        <!-- Left / Right arrows updated to point to carousel-2 -->
+        <button class="car-btn car-prev" onclick="moveCarousel('carousel-2', -1)">&#8249;</button>
+        <button class="car-btn car-next" onclick="moveCarousel('carousel-2', 1)">&#8250;</button>
+
+        <!-- Dot indicators updated to match -->
+        <div class="car-dots" id="dots-carousel-2"></div>
+      </div>
+
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Mobile App</span>
+          <span class="project-tag">UI/UX</span>
+          <span class="project-tag">Featured</span>
+        </div>
+        <h3 class="project-title">MySolar+</h3>
+        <p class="project-desc">Designed the MySolar+ employee management app UI/UX in Figma with features like task tracking, meetings, trips, site visits, and live location management to improve workflow efficiency and user experience.</p>
+        <a href="#" class="project-link">View Case Study</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card">
+      <div class="project-body">
+        <div class="carousel-slide"><img src="images/Frame.png" alt="Frame screen"></div>
+        <div class="project-tags"><span class="project-tag">Dashboard</span><span class="project-tag">SaaS</span></div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="carousel-wrapper" id="carousel-3">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="images/Sign-in.png" alt="Sign-in screen"></div>
+        <div class="carousel-slide"><img src="images/Sing-in2.png" alt="Sign-in2 screen"></div>
+        <div class="project-tags"><span class="project-tag">E-commerce</span><span class="project-tag">Mobile</span></div>
+
+         </div>
+
+        <!-- Counter updated dynamically by JS -->
+        <div class="car-counter" id="counter-carousel-3">1 / 2</div>
+
+        <!-- Left / Right arrows updated to point to carousel-3 -->
+        <button class="car-btn car-prev" onclick="moveCarousel('carousel-3', -1)">&#8249;</button>
+        <button class="car-btn car-next" onclick="moveCarousel('carousel-3', 1)">&#8250;</button>
+
+        <!-- Dot indicators updated to match -->
+        <div class="car-dots" id="dots-carousel-3"></div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+   <div class="carousel-wrapper" id="carousel-4">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="images/Cakemake.png" alt="ui"></div>
+        <div class="project-tags"><span class="project-tag">E-commerce</span><span class="project-tag">Mobile</span></div>
+
+         </div>
+
+        <!-- Counter updated dynamically by JS -->
+        <div class="car-counter" id="counter-carousel-3">1 </div>
+
+        <!-- Left / Right arrows updated to point to carousel-3 -->
+        <button class="car-btn car-prev" onclick="moveCarousel('carousel-4', -1)">&#8249;</button>
+        <button class="car-btn car-next" onclick="moveCarousel('carousel-4', 1)">&#8250;</button>
+
+        <!-- Dot indicators updated to match -->
+        <div class="car-dots" id="dots-carousel-3"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="process-section fade-in">
+  <div class="section-label">My Process</div>
+  <h2 class="section-title">How I <em>approach</em> every design challenge</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discover</div>
+      <p class="step-desc">Deep dive into user research, stakeholder interviews, and competitive analysis to understand the problem space thoroughly.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Define</div>
+      <p class="step-desc">Synthesize research into clear problem statements, user personas, and journey maps that guide every design decision.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Design</div>
+      <p class="step-desc">Rapid ideation through wireframes and hi-fi prototypes — always keeping user goals at the centre of every iteration.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Deliver</div>
+      <p class="step-desc">Usability testing, developer handoff with meticulous specs, and post-launch analysis to measure real-world impact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section fade-in">
+  <div class="contact-info">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's create something <em>remarkable</em></h2>
+    <p style="font-size:0.95rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.8;">Whether it's a new product, a redesign, or a design system — I'd love to hear about your project and explore how we can work together.</p>
+    <div class="contact-item">
+      <div class="contact-icon">✉</div>
+      <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:drashti01jpatel@gmail.com">drashti01jpatel@gmail.com</a></div></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div><div class="contact-label">Phone</div><div class="contact-value"><a href="tel:+919974126462">+91 9974 126 462</a></div></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div><div class="contact-label">Location</div><div class="contact-value">Vadodara, Gujarat, India</div></div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Drashti Patel"></div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+    <div class="form-group"><label>Project Type</label><input type="text" placeholder="e.g. Mobile App Design, Website Design"></div>
+    <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project and goals…"></textarea></div>
+    <button class="btn-send" onclick="alert('Message sent! Drashti will get back to you soon.')">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Drashti Patel</span>
+  <span class="footer-copy">© 2025 · UI / UX Designer · Crafted with intention</span>
+</footer>
+
+<script>
+  /* Scroll fade-in */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── CAROUSEL ── */
+  function initCarousels() {
+    document.querySelectorAll('.carousel-wrapper').forEach(car => {
+      const track    = car.querySelector('.carousel-track');
+      const slides   = track.querySelectorAll('.carousel-slide');
+      const dotsBox  = car.querySelector('.car-dots');
+      const counter  = car.querySelector('.car-counter');
+      const total    = slides.length;
+      let current    = 0;
+
+      /* Build dot buttons */
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'car-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.onclick = () => goTo(i);
+        dotsBox.appendChild(dot);
+      });
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsBox.querySelectorAll('.car-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === current)
+        );
+        if (counter) counter.textContent = `${current + 1} / ${total}`;
+      }
+
+      /* Touch / swipe support */
+      let startX = 0;
+      car.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      car.addEventListener('touchend',   e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+      });
+
+      /* Expose for arrow buttons */
+      car._goTo    = goTo;
+      car._current = () => current;
+    });
+  }
+
+  function moveCarousel(id, dir) {
+    const car = document.getElementById(id);
+    car._goTo(car._current() + dir);
+  }
+
+  initCarousels();
+</script>
+
+</body>
+</html>
