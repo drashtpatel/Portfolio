@@ -1120,86 +1120,132 @@
       </div>
 
       <!-- Card 3 -->
-      <div class="carousel-wrapper" id="carousel-3">
-        <div class="carousel-track">
-          <div class="carousel-slide"><img src="images/Sign-in.png" alt="Sign-in screen"></div>
-          <div class="carousel-slide"><img src="images/Sing-in2.png" alt="Sign-in2 screen"></div>
-          <div class="project-tags"><span class="project-tag">E-commerce</span><span class="project-tag">Mobile</span>
+      <div class="project-card">
+        <div class="carousel-wrapper" id="carousel-3">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="images/Sign-in.png" alt="Sign-in screen">
+            </div>
+
+            <div class="carousel-slide">
+              <img src="images/Sing-in2.png" alt="Sign-in2 screen">
+            </div>
           </div>
 
+          <div class="car-counter" id="counter-carousel-3">1 / 2</div>
+
+          <button class="car-btn car-prev" onclick="moveCarousel('carousel-3', -1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="moveCarousel('carousel-3', 1)">&#8250;</button>
+
+          <div class="car-dots" id="dots-carousel-3"></div>
         </div>
 
-        <!-- Counter updated dynamically by JS -->
-        <div class="car-counter" id="counter-carousel-3">1 / 2</div>
-
-        <!-- Left / Right arrows updated to point to carousel-3 -->
-        <button class="car-btn car-prev" onclick="moveCarousel('carousel-3', -1)">&#8249;</button>
-        <button class="car-btn car-next" onclick="moveCarousel('carousel-3', 1)">&#8250;</button>
-
-        <!-- Dot indicators updated to match -->
-        <div class="car-dots" id="dots-carousel-3"></div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="carousel-wrapper" id="carousel-4">
-        <div class="carousel-track">
-          <div class="carousel-slide">
-            <img src="images/Cakemake.png" alt="ui">
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Authentication</span>
+            <span class="project-tag">Mobile UI</span>
           </div>
+
+          <h3 class="project-title">Sign In Experience</h3>
+
+          <p class="project-desc">
+            Clean and minimal authentication flow designed for better usability and faster onboarding experience.
+          </p>
         </div>
-
-        <div class="car-counter" id="counter-carousel-4">1 / 1</div>
-
-        <button class="car-btn car-prev" onclick="moveCarousel('carousel-4', -1)">&#8249;</button>
-        <button class="car-btn car-next" onclick="moveCarousel('carousel-4', 1)">&#8250;</button>
-
-        <div class="car-dots" id="dots-carousel-4"></div>
       </div>
 
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">UI Design</span>
-          <span class="project-tag">Mobile</span>
-        </div>
-        <h3 class="project-title">CakeMake</h3>
-        <p class="project-desc">
-          Cake ordering mobile app UI design focused on easy product browsing and ordering experience.
-        </p>
-      </div>
-    </div>
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="carousel-wrapper" id="carousel-4">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="images/Dentist web ui.png" alt="Dentist UI">
+            </div>
+          </div>
 
-    <div class="project-card">
-      <div class="carousel-wrapper" id="carousel-5">
-        <div class="carousel-track">
-          <div class="carousel-slide"><img src="images/D1.jpeg" alt="ui"></div>
-          <div class="carousel-slide"><img src="images/D2.jpeg" alt="ui"></div>
-          <div class="carousel-slide"><img src="images/D4.jpeg" alt="ui"></div>
-          <div class="carousel-slide"><img src="images/D5.jpeg" alt="ui"></div>
-          <div class="carousel-slide"><img src="images/D6.jpeg" alt="ui"></div>
+          <div class="car-counter" id="counter-carousel-4">1 / 1</div>
+
+          <button class="car-btn car-prev" onclick="moveCarousel('carousel-4', -1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="moveCarousel('carousel-4', 1)">&#8250;</button>
+
+          <div class="car-dots" id="dots-carousel-4"></div>
         </div>
 
-        <div class="car-counter" id="counter-carousel-5">1 / 5</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Healthcare</span>
+            <span class="project-tag">Website UI</span>
+          </div>
 
-        <button class="car-btn car-prev" onclick="moveCarousel('carousel-5', -1)">&#8249;</button>
-        <button class="car-btn car-next" onclick="moveCarousel('carousel-5', 1)">&#8250;</button>
+          <h3 class="project-title">Dentist Website UI</h3>
 
-        <div class="car-dots" id="dots-carousel-5"></div>
-      </div>
-
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">Dashboard</span>
-          <span class="project-tag">UI/UX</span>
+          <p class="project-desc">
+            Elegant dental clinic website interface focused on trust, clarity, and patient-friendly navigation.
+          </p>
         </div>
-        <h3 class="project-title">Dashboard Design</h3>
-        <p class="project-desc">
-          Modern dashboard interface focused on usability, analytics visualization, and workflow efficiency.
-        </p>
       </div>
-    </div>
 
-    </div>
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="carousel-wrapper" id="carousel-5">
+          <div class="carousel-track">
+            <div class="carousel-slide"><img src="images/Cakemake.png" alt="CakeMake UI"></div>
+          </div>
+
+          <div class="car-counter" id="counter-carousel-5">1 / 1</div>
+
+          <button class="car-btn car-prev" onclick="moveCarousel('carousel-5', -1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="moveCarousel('carousel-5', 1)">&#8250;</button>
+
+          <div class="car-dots" id="dots-carousel-5"></div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">UI Design</span>
+            <span class="project-tag">Mobile</span>
+          </div>
+
+          <h3 class="project-title">CakeMake</h3>
+
+          <p class="project-desc">
+            Cake ordering mobile app UI design focused on smooth browsing and delightful ordering experience.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="carousel-wrapper" id="carousel-6">
+          <div class="carousel-track">
+            <div class="carousel-slide"><img src="images/D1.jpeg" alt="Dashboard"></div>
+            <div class="carousel-slide"><img src="images/D2.jpeg" alt="Dashboard"></div>
+            <div class="carousel-slide"><img src="images/D4.jpeg" alt="Dashboard"></div>
+            <div class="carousel-slide"><img src="images/D5.jpeg" alt="Dashboard"></div>
+            <div class="carousel-slide"><img src="images/D6.jpeg" alt="Dashboard"></div>
+          </div>
+
+          <div class="car-counter" id="counter-carousel-6">1 / 5</div>
+
+          <button class="car-btn car-prev" onclick="moveCarousel('carousel-6', -1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="moveCarousel('carousel-6', 1)">&#8250;</button>
+
+          <div class="car-dots" id="dots-carousel-6"></div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Dashboard</span>
+            <span class="project-tag">Analytics</span>
+          </div>
+
+          <h3 class="project-title">Dashboard Design</h3>
+
+          <p class="project-desc">
+            Modern analytics dashboard focused on workflow efficiency, usability, and data visualization.
+          </p>
+        </div>
+      </div>
   </section>
 
   <!-- PROCESS -->
